@@ -14,7 +14,7 @@ The Sticky Menu (Or Anything) On Scroll plugin for WordPress allows you to make 
 
 **Features**
 
-- any element with a unique classname or ID can stick at the top of the page once you scroll past it
+- any unique element with a name, class or ID can stick at the top of the page once you scroll past it
 - optionally, add any amount of space so that the element is not stuck at the very top of the page
 - optionally, add Z-index to element in case other elements obscure or peek through
 - debug mode: find out possible reasons why your element doesn't stick
@@ -23,7 +23,7 @@ The Sticky Menu (Or Anything) On Scroll plugin for WordPress allows you to make 
 == Changelog ==
 
 = 1.0 RELEASE =
-* initial release
+* initial release (using v1.1 of the standalone jQuery plugin)
 
 
 == Installation ==
@@ -40,6 +40,9 @@ A: Make sure that if you select the element by its classname, it is preceded by 
 
 Q: Still doesn't work, man.
 A: Check the "Debug Mode" checkbox in the plugin's settings. Reload the page and you may see errors in your browser's console window.
+
+Q: I'll need more help please!
+A: The plugin's own page can be found at http://www.senff.com/plugins/sticky-anything-wp
 
 Q: I remember you! Are you still involved with Def Leppard?
 A: Nope. Still friends with some of them though.
