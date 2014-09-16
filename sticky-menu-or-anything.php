@@ -19,8 +19,8 @@ if (!function_exists('sticky_anthing_default_options')) {
 		if (get_option('sticky_anything_options') === false) {
 			$new_options['sa_version'] = $versionNum;
 			$new_options['sa_element'] = '';
-			$new_options['sa_topspace'] = '0';
-			$new_options['sa_zindex'] = '1';
+			$new_options['sa_topspace'] = '';
+			$new_options['sa_zindex'] = '';
 			$new_options['sa_debugmode'] = false;
 			add_option('sticky_anything_options',$new_options);
 		} else {
@@ -47,7 +47,7 @@ if (!function_exists('load_sticky_anything')) {
 			$options['sa_topspace'] = '0';
 		}
 
-		if ($options['sa_zindex']) {
+		if (!$options['sa_zindex']) {
 			$options['sa_zindex'] = '1';
 		}
 
@@ -159,14 +159,14 @@ if (!function_exists('sticky_anything_config_page')) {
 				<tr>
 					<th scope="row">Space between top of page and sticky element: (optional) <a href="#" title="If you don't want the element to be sticky at the very top of the page, but a little lower, add the number of pixels that should be between your element and the 'ceiling' of the page." class="help">?</a></th>
 					<td>
-						<input type="number" id="sa_topspace" name="sa_topspace" value="<?php echo esc_html( $sticky_anything_options['sa_topspace'] ); ?>" style="width:50px;" /> pixels
+						<input type="number" id="sa_topspace" name="sa_topspace" value="<?php echo esc_html( $sticky_anything_options['sa_topspace'] ); ?>" style="width:80px;" /> pixels
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">Z-index: (optional) <a href="#" title="If there are other elements on the page that obscure/overlap the sticky element, adding a Z-index might help. If you have no idea what that means, try entering 99999." class="help">?</a></th>
 					<td>
-						<input type="number" width="10" id="sa_zindex" name="sa_zindex" value="<?php echo esc_html( $sticky_anything_options['sa_zindex'] ); ?>" style="width:50px;" />
+						<input type="number" id="sa_zindex" name="sa_zindex" value="<?php echo esc_html( $sticky_anything_options['sa_zindex'] ); ?>" style="width:80px;" />
 					</td>
 				</tr>
 
