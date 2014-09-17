@@ -8,7 +8,7 @@
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Sticky Menu (Or Anything) On Scroll for WordPress will let you choose any element on your page that will be "sticky" at the top once you scroll down.
+Sticky Menu (Or Anything) On Scroll will let you choose any element on your page that will be "sticky" at the top once you scroll down.
 
 ## Description
 
@@ -46,7 +46,7 @@ Check the "Debug Mode" checkbox in the plugin's settings. Reload the page and yo
 The current version only allows one sticky element. Having more than one may clutter up your page and confuse the user (imagine having a menu stuck at the top, and a banner stuck on the left, and another thing on the right, etc.). Having said that, this functionality may be added to a future version.
 
 ### I'll need more help please!
-The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-anything-wp)
+The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-anything-wp).
 
 For any other issues, please use the [WordPress.org forum](https://wordpress.org/support/).
 
