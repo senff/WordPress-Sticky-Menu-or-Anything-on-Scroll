@@ -1,13 +1,14 @@
 # Sticky Menu (or Anything!) on Scroll
 * Contributors: senff
 * Tags: plugin, sticky, menu, scroll, element
-* License: GPLv3
-* License URI: http://www.gnu.org/licenses/gpl.html
+* Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 * Requires at least: 3.6
 * Tested up to: 4.0
 * Stable tag: 1.0
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Sticky Menu (Or Anything) On Scroll will let you choose any element on your page that will be "sticky" at the top once you scroll down.
+Sticky Menu (Or Anything) On Scroll for WordPress will let you choose any element on your page that will be "sticky" at the top once you scroll down.
 
 ## Description
 
@@ -27,8 +28,6 @@ A little bit of basic HTML/CSS knowledge is required. You just need to know how 
 
 ## Installation 
 
-### Installation
-
 1. Upload the "sticky-menu-or-anything" directory to your "wp-content/plugins" directory.
 2. In your WordPress admin, go to PLUGINS and activate "Sticky Menu (or Anything!)"
 3. Go to SETTINGS - STICKY MENU (OR ANYTHING!)
@@ -47,12 +46,23 @@ Check the "Debug Mode" checkbox in the plugin's settings. Reload the page and yo
 The current version only allows one sticky element. Having more than one may clutter up your page and confuse the user (imagine having a menu stuck at the top, and a banner stuck on the left, and another thing on the right, etc.). Having said that, this functionality may be added to a future version.
 
 ### I'll need more help please!
-The plugin's own page can be found at http://www.senff.com/plugins/sticky-anything-wp
+The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-anything-wp)
 
-For any other issues, please use the WordPress.org forum.
+For any other issues, please use the [WordPress.org forum](https://wordpress.org/support/).
+
+
+## Screenshots
+
+1. Settings screen
 
 
 ## Changelog
 
-### 1.0 RELEASE
+### 1.0 
 * initial release (using v1.1 of the standalone jQuery plugin)
+
+
+## Upgrade Notice 
+
+### 1.0 
+Initial release of the plugin

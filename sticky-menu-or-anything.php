@@ -42,7 +42,6 @@ if (!function_exists('load_sticky_anything')) {
 		$options = get_option('sticky_anything_options');
 
 		// Set defaults when empty (because '' does not work with the JQ plugin) 
-
 		if (!$options['sa_topspace']) {
 			$options['sa_topspace'] = '0';
 		}
@@ -109,7 +108,6 @@ if (!function_exists('sticky_anything_config_page')) {
 				$warnings = true;
 			}
 
-
 			// IF THERE ARE ERRORS, SHOW THEM
 			if ( $warnings == true ) { 
 				echo '<div id="message" class="error"><p><strong>Please review the current settings:</strong></p>';
@@ -132,63 +130,65 @@ if (!function_exists('sticky_anything_config_page')) {
 
 		?>
 
+		<table class="widefat">
+			<tr>
+				<td>
+
+					<form method="post" action="admin-post.php">
+
+						<input type="hidden" name="action" value="save_sticky_anything_options" />
+						<!-- Adding security through hidden referrer field -->
+						<?php wp_nonce_field( 'sticky_anything' ); ?>
+
+						<table class="form-table">
+
+							<tr>
+								<th scope="row">Sticky Element: <span class="required">*</span> <a href="#" title="The element that needs to be sticky once you scroll. This can be your menu, or any other element like a sidebar, ad banner, etc. Make sure this is a unique identifier." class="help">?</a></th>
+								<td>
+									<input type="text" id="sa_element" name="sa_element" value="<?php 
+										if ($sticky_anything_options['sa_element'] != '#NO-ELEMENT') {
+											echo esc_html( $sticky_anything_options['sa_element'] ); 
+										}
+									?>"/> (e.g. #main-navigation, .main-menu-1, header nav, etc.) 
+								</td>
+							</tr>
 
 
-		<table class="widefat"><tr><td>
+							<tr>
+								<th scope="row">Space between top of page and sticky element: (optional) <a href="#" title="If you don't want the element to be sticky at the very top of the page, but a little lower, add the number of pixels that should be between your element and the 'ceiling' of the page." class="help">?</a></th>
+								<td>
+									<input type="number" id="sa_topspace" name="sa_topspace" value="<?php echo esc_html( $sticky_anything_options['sa_topspace'] ); ?>" style="width:80px;" /> pixels
+								</td>
+							</tr>
 
-		<form method="post" action="admin-post.php">
+							<tr>
+								<th scope="row">Z-index: (optional) <a href="#" title="If there are other elements on the page that obscure/overlap the sticky element, adding a Z-index might help. If you have no idea what that means, try entering 99999." class="help">?</a></th>
+								<td>
+									<input type="number" id="sa_zindex" name="sa_zindex" value="<?php echo esc_html( $sticky_anything_options['sa_zindex'] ); ?>" style="width:80px;" />
+								</td>
+							</tr>
 
-			<input type="hidden" name="action" value="save_sticky_anything_options" />
-			<!-- Adding security through hidden referrer field -->
-			<?php wp_nonce_field( 'sticky_anything' ); ?>
+							<tr>
+								<th scope="row">Debug mode: <a href="#" title="When Debug Mode is on, error messages will be shown in your browser's console when the element you selected either doesn't exist, or when there are more elements on the page with your chosen selector." class="help">?</a></th>
+								<td>
+									<input type="checkbox" id="sa_debugmode" name="sa_debugmode" <?php if ($sticky_anything_options['sa_debugmode']  ) echo ' checked="checked" ';?> />
+									<label for="sa_debugmode"><strong>Log plugin errors in browser console</strong></label>
+									<p class="description">Do NOT check this option in production environments.</p>
+								</td>
+							</tr>
 
-			<table class="form-table">
+						</table>
 
-				<tr>
-					<th scope="row">Sticky Element: <span class="required">*</span> <a href="#" title="The element that needs to be sticky once you scroll. This can be your menu, or any other element like a sidebar, ad banner, etc. Make sure this is a unique identifier." class="help">?</a></th>
-					<td>
-						<input type="text" id="sa_element" name="sa_element" value="<?php 
-							if ($sticky_anything_options['sa_element'] != '#NO-ELEMENT') {
-								echo esc_html( $sticky_anything_options['sa_element'] ); 
-							}
-						?>"/> (e.g. #main-navigation, .main-menu-1, header nav, etc.) 
-					</td>
-				</tr>
+						<input type="submit" value="SAVE SETTINGS" class="button-primary"/>
 
+						<p>&nbsp;</p>
+					</form>
 
-				<tr>
-					<th scope="row">Space between top of page and sticky element: (optional) <a href="#" title="If you don't want the element to be sticky at the very top of the page, but a little lower, add the number of pixels that should be between your element and the 'ceiling' of the page." class="help">?</a></th>
-					<td>
-						<input type="number" id="sa_topspace" name="sa_topspace" value="<?php echo esc_html( $sticky_anything_options['sa_topspace'] ); ?>" style="width:80px;" /> pixels
-					</td>
-				</tr>
+				</td>
+			</tr>
+		</table>
 
-				<tr>
-					<th scope="row">Z-index: (optional) <a href="#" title="If there are other elements on the page that obscure/overlap the sticky element, adding a Z-index might help. If you have no idea what that means, try entering 99999." class="help">?</a></th>
-					<td>
-						<input type="number" id="sa_zindex" name="sa_zindex" value="<?php echo esc_html( $sticky_anything_options['sa_zindex'] ); ?>" style="width:80px;" />
-					</td>
-				</tr>
-
-				<tr>
-					<th scope="row">Debug mode: <a href="#" title="When Debug Mode is on, error messages will be shown in your browser's console when the element you selected either doesn't exist, or when there are more elements on the page with your chosen selector." class="help">?</a></th>
-					<td>
-						<input type="checkbox" id="sa_debugmode" name="sa_debugmode" <?php if ($sticky_anything_options['sa_debugmode']  ) echo ' checked="checked" ';?> />
-						<label for="sa_debugmode"><strong>Log plugin errors in browser console</strong></label>
-						<p class="description">Do NOT check this option in production environments.</p>
-					</td>
-				</tr>
-
-			</table>
-
-			<input type="submit" value="SAVE SETTINGS" class="button-primary"/>
-
-			<p></p>
-		</form>
-
-		</td></tr></table>
-
-		<hr>
+		<hr />
 
 		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.0 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
 
@@ -251,9 +251,6 @@ if (!function_exists('process_sticky_anything_options')) {
 		exit;
 	}
 }
-
-
-
 
 
 // === HOOKS AND ACTIONS ==================================================================================
