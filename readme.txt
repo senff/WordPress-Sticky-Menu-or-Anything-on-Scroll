@@ -4,7 +4,7 @@ Tags: plugin, sticky, menu, scroll, element
 Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,7 @@ A little bit of basic HTML/CSS knowledge is required. You just need to know how 
 
 * **Any element can stick**: although common use is for navigation menus, the plugin will let you pick any unique element with a name, class or ID to stick at the top of the page once you scroll past it. Use it for a sidebar, Call-to-action box, banner ad, etc.
 * **Positioning from top**: optionally, you can add any amount of space between the sticky element and the top of the page, so that the element is not always stuck at the "ceiling" of the page.
+* **Enable for certain screen sizes only**: optionally, you can set a minimum and/or maximum screen size where the stickiness should work. This can be handy if you have a responsive site and you don't want your element to be sticky on smaller screens, for example. 
 * **Z-index**: in case there are other elements on the page that obscure or peek through your sticky element, you can add a Z-index easily.
 * **Debug Mode:** find out possible reasons why your element doesn't stick by switching on Debug Mode, and error messages will appear in your browser's console.
 
@@ -58,11 +59,29 @@ For any other issues, please use the [WordPress.org forum](https://wordpress.org
 
 == Changelog ==
 
+= 1.1.2 =
+* Fixes element width calculation bug.
+
+= 1.1.1 =
+* Fixes viewport calculation bug.
+
+= 1.1 =
+* Added functionality for optional minimum/maximum screen size
+
 = 1.0 =
 * initial release (using v1.1 of the standalone jQuery plugin)
 
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Fixes element width calculation bug.
+
+= 1.1.1 =
+Fixes viewport calculation bug.
+
+= 1.1 =
+Added functionality: you can now set a minimum and/or maximum screen size where the element should be sticky (handy for responsive designs, should you not want your element to be sticky below or above certain screen sizes).
 
 = 1.0 =
 Initial release of the plugin

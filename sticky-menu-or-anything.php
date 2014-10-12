@@ -5,7 +5,7 @@ Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Description: Pick any element on your page, and it will stick when it reaches the top of the page when you scroll down. Usually handy for navigation menus, but can be used for any (unique) element on your page.
 Author: Mark Senff
 Author URI: http://www.senff.com
-Version: 1.0
+Version: 1.1.2
 */
 
 defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
@@ -15,19 +15,33 @@ defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
 
 if (!function_exists('sticky_anthing_default_options')) {
 	function sticky_anthing_default_options() {
-		$versionNum = '0.2';
+		$versionNum = '1.1.2';
 		if (get_option('sticky_anything_options') === false) {
 			$new_options['sa_version'] = $versionNum;
 			$new_options['sa_element'] = '';
 			$new_options['sa_topspace'] = '';
+			$new_options['sa_minscreenwidth'] = '';			
+			$new_options['sa_maxscreenwidth'] = '';			
 			$new_options['sa_zindex'] = '';
 			$new_options['sa_debugmode'] = false;
 			add_option('sticky_anything_options',$new_options);
-		} else {
-			$existing_options = get_option('sticky_anything_options');
-			$existing_options['sa_version'] = $versionNum;
-			update_option('sticky_anything_options',$existing_options);
-		}
+		} 
+	}
+}
+
+if (!function_exists('sticky_anything_update')) {
+	function sticky_anything_update() {
+		$versionNum = '1.1.2';
+		$existing_options = get_option('sticky_anything_options');
+
+		if(!isset($existing_options['sa_minscreenwidth'])) {
+			// Introduced in version 1.1
+			$existing_options['sa_minscreenwidth'] = '';
+			$existing_options['sa_maxscreenwidth'] = '';
+		} 
+
+		$existing_options['sa_version'] = $versionNum;
+		update_option('sticky_anything_options',$existing_options);
 	}
 }
 
@@ -46,6 +60,14 @@ if (!function_exists('load_sticky_anything')) {
 			$options['sa_topspace'] = '0';
 		}
 
+		if (!$options['sa_minscreenwidth']) {
+			$options['sa_minscreenwidth'] = '0';
+		}
+
+		if (!$options['sa_maxscreenwidth']) {
+			$options['sa_maxscreenwidth'] = '999999';
+		}
+
 		if (!$options['sa_zindex']) {
 			$options['sa_zindex'] = '1';
 		}
@@ -53,6 +75,8 @@ if (!function_exists('load_sticky_anything')) {
 		$script_vars = array(
 		      'element' => $options['sa_element'],
 		      'topspace' => $options['sa_topspace'],
+		      'minscreenwidth' => $options['sa_minscreenwidth'],
+		      'maxscreenwidth' => $options['sa_maxscreenwidth'],
 		      'zindex' => $options['sa_zindex'],
 		      'debugmode' => $options['sa_debugmode']
 		);
@@ -103,6 +127,21 @@ if (!function_exists('sticky_anything_config_page')) {
 				$warnings = true;
 			}
 
+			if ( (!is_numeric($sticky_anything_options['sa_minscreenwidth'])) && ($sticky_anything_options['sa_minscreenwidth'] != '')) {
+				// Minimum width is not empty and has bad value
+				$warnings = true;
+			}
+
+			if ( (!is_numeric($sticky_anything_options['sa_maxscreenwidth'])) && ($sticky_anything_options['sa_maxscreenwidth'] != '')) {
+				// Maximum width is not empty and has bad value
+				$warnings = true;
+			}
+
+			if ( ($sticky_anything_options['sa_minscreenwidth'] != '') && ($sticky_anything_options['sa_maxscreenwidth'] != '') && ( ($sticky_anything_options['sa_minscreenwidth']) >= ($sticky_anything_options['sa_maxscreenwidth']) ) ) {
+				// Minimum width is larger than the maximum width
+				$warnings = true;
+			}
+
 			if ((!is_numeric($sticky_anything_options['sa_zindex'])) && ($sticky_anything_options['sa_zindex'] != '')) {
 				// Z-index is not empty and has bad value
 				$warnings = true;
@@ -119,6 +158,18 @@ if (!function_exists('sticky_anything_config_page')) {
 
 				if ( (!is_numeric($sticky_anything_options['sa_topspace'])) && ($sticky_anything_options['sa_topspace'] != '')) {
 					echo '<li><strong>TOP POSITION</strong> has to be a number (do not include "px" or "pixels", or any other characters).</li>';
+				}
+
+				if ( (!is_numeric($sticky_anything_options['sa_minscreenwidth'])) && ($sticky_anything_options['sa_minscreenwidth'] != '')) {
+					echo '<li><strong>MINIMUM SCREEN WIDTH</strong> has to be a number (do not include "px" or "pixels", or any other characters).</li>';
+				}
+
+				if ( (!is_numeric($sticky_anything_options['sa_maxscreenwidth'])) && ($sticky_anything_options['sa_maxscreenwidth'] != '')) {
+					echo '<li><strong>MAXIMUM SCREEN WIDTH</strong> has to be a number (do not include "px" or "pixels", or any other characters).</li>';
+				}
+
+				if ( ($sticky_anything_options['sa_minscreenwidth'] != '') && ($sticky_anything_options['sa_maxscreenwidth'] != '') && ( ($sticky_anything_options['sa_minscreenwidth']) >= ($sticky_anything_options['sa_maxscreenwidth']) ) ) {
+					echo '<li><strong>MAXIMUM</strong> screen width has to have a larger value than the <strong>MINIMUM</strong> screen width.</li>';
 				}
 
 				if ((!is_numeric($sticky_anything_options['sa_zindex'])) && ($sticky_anything_options['sa_zindex'] != '')) {
@@ -162,6 +213,20 @@ if (!function_exists('sticky_anything_config_page')) {
 							</tr>
 
 							<tr>
+								<th scope="row">Element should not be sticky when screen smaller than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is small (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is smaller than this value." class="help">?</a></th>
+								<td>
+									<input type="number" id="sa_minscreenwidth" name="sa_minscreenwidth" value="<?php echo esc_html( $sticky_anything_options['sa_minscreenwidth'] ); ?>" style="width:80px;" /> pixels
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">Element should not be sticky when screen larger than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is large (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is wider than this value." class="help">?</a></th>
+								<td>
+									<input type="number" id="sa_maxscreenwidth" name="sa_maxscreenwidth" value="<?php echo esc_html( $sticky_anything_options['sa_maxscreenwidth'] ); ?>" style="width:80px;" /> pixels
+								</td>
+							</tr>
+
+							<tr>
 								<th scope="row">Z-index: (optional) <a href="#" title="If there are other elements on the page that obscure/overlap the sticky element, adding a Z-index might help. If you have no idea what that means, try entering 99999." class="help">?</a></th>
 								<td>
 									<input type="number" id="sa_zindex" name="sa_zindex" value="<?php echo esc_html( $sticky_anything_options['sa_zindex'] ); ?>" style="width:80px;" />
@@ -190,7 +255,7 @@ if (!function_exists('sticky_anything_config_page')) {
 
 		<hr />
 
-		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.0 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
+		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.1.2 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
 
 	</div>
 
@@ -227,6 +292,18 @@ if (!function_exists('process_sticky_anything_options')) {
 			}
 		}
 
+		foreach ( array('sa_minscreenwidth') as $option_name ) {
+			if ( isset( $_POST[$option_name] ) ) {
+				$options[$option_name] = sanitize_text_field( $_POST[$option_name] );
+			}
+		}
+
+		foreach ( array('sa_maxscreenwidth') as $option_name ) {
+			if ( isset( $_POST[$option_name] ) ) {
+				$options[$option_name] = sanitize_text_field( $_POST[$option_name] );
+			}
+		}
+
 		foreach ( array('sa_zindex') as $option_name ) {
 			if ( isset( $_POST[$option_name] ) ) {
 				$options[$option_name] = sanitize_text_field( $_POST[$option_name] );
@@ -256,6 +333,7 @@ if (!function_exists('process_sticky_anything_options')) {
 // === HOOKS AND ACTIONS ==================================================================================
 
 register_activation_hook( __FILE__, 'sticky_anthing_default_options' );
+add_action('init','sticky_anything_update',1);
 add_action('wp_enqueue_scripts', 'load_sticky_anything');
 add_action('admin_menu', 'sticky_anything_menu');
 add_action('admin_init', 'sticky_anything_admin_init' );
