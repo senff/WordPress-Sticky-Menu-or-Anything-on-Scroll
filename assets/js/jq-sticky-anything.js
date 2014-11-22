@@ -1,5 +1,5 @@
 /**
-* @preserve Sticky Anything 1.1.2 | @senff | GPL2 Licensed
+* @preserve Sticky Anything 1.1.3 | @senff | GPL2 Licensed
 */
 
 (function ($) {
@@ -61,9 +61,9 @@ function stickIt(stickyTop,minwidth,maxwidth) {
     orgElement = $('.original');
     coordsOrgElement = orgElement.offset();
     leftOrgElement = coordsOrgElement.left;  
-    widthOrgElement = orgElement.outerWidth();
+    widthOrgElement = orgElement.css('width');
 
-    $('.cloned').css('left',leftOrgElement+'px').css('top',stickyTop+'px').css('width',widthOrgElement+'px').show();
+    $('.cloned').css('left',leftOrgElement+'px').css('top',stickyTop+'px').css('width',widthOrgElement).show();
     $('.original').css('visibility','hidden');
   } else {
     // not scrolled past the menu; only show the original menu.

@@ -4,7 +4,7 @@ Tags: plugin, sticky, menu, scroll, element
 Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,9 @@ For any other issues, please use the [WordPress.org forum](https://wordpress.org
 
 == Changelog ==
 
+= 1.1.3 =
+* Fixes width calculation bug introduced in previous version (sorry about that), box sizing now supported.
+
 = 1.1.2 =
 * Fixes element width calculation bug.
 
@@ -66,13 +69,16 @@ For any other issues, please use the [WordPress.org forum](https://wordpress.org
 * Fixes viewport calculation bug.
 
 = 1.1 =
-* Added functionality for optional minimum/maximum screen size
+* Added functionality for optional minimum/maximum screen size.
 
 = 1.0 =
-* initial release (using v1.1 of the standalone jQuery plugin)
+* Initial release (using v1.1 of the standalone jQuery plugin).
 
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+* Fixes width calculation bug introduced in previous version (sorry about that), box sizing now supported.
 
 = 1.1.2 =
 Fixes element width calculation bug.
@@ -84,4 +90,4 @@ Fixes viewport calculation bug.
 Added functionality: you can now set a minimum and/or maximum screen size where the element should be sticky (handy for responsive designs, should you not want your element to be sticky below or above certain screen sizes).
 
 = 1.0 =
-Initial release of the plugin
+Initial release of the plugin.

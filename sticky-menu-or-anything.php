@@ -5,7 +5,7 @@ Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Description: Pick any element on your page, and it will stick when it reaches the top of the page when you scroll down. Usually handy for navigation menus, but can be used for any (unique) element on your page.
 Author: Mark Senff
 Author URI: http://www.senff.com
-Version: 1.1.2
+Version: 1.1.3
 */
 
 defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
@@ -15,7 +15,7 @@ defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
 
 if (!function_exists('sticky_anthing_default_options')) {
 	function sticky_anthing_default_options() {
-		$versionNum = '1.1.2';
+		$versionNum = '1.1.3';
 		if (get_option('sticky_anything_options') === false) {
 			$new_options['sa_version'] = $versionNum;
 			$new_options['sa_element'] = '';
@@ -31,7 +31,7 @@ if (!function_exists('sticky_anthing_default_options')) {
 
 if (!function_exists('sticky_anything_update')) {
 	function sticky_anything_update() {
-		$versionNum = '1.1.2';
+		$versionNum = '1.1.3';
 		$existing_options = get_option('sticky_anything_options');
 
 		if(!isset($existing_options['sa_minscreenwidth'])) {
@@ -213,14 +213,14 @@ if (!function_exists('sticky_anything_config_page')) {
 							</tr>
 
 							<tr>
-								<th scope="row">Element should not be sticky when screen smaller than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is small (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is smaller than this value." class="help">?</a></th>
+								<th scope="row">Do not stick element when screen smaller than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is small (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is smaller than this value." class="help">?</a></th>
 								<td>
 									<input type="number" id="sa_minscreenwidth" name="sa_minscreenwidth" value="<?php echo esc_html( $sticky_anything_options['sa_minscreenwidth'] ); ?>" style="width:80px;" /> pixels
 								</td>
 							</tr>
 
 							<tr>
-								<th scope="row">Element should not be sticky when screen larger than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is large (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is wider than this value." class="help">?</a></th>
+								<th scope="row">Do not stick element when screen larger than: (optional) <a href="#" title="Sometimes you do not want your element to be sticky when your screen is large (responsive menus, etc). If you enter a value here, your menu will not be sticky when your screen width is wider than this value." class="help">?</a></th>
 								<td>
 									<input type="number" id="sa_maxscreenwidth" name="sa_maxscreenwidth" value="<?php echo esc_html( $sticky_anything_options['sa_maxscreenwidth'] ); ?>" style="width:80px;" /> pixels
 								</td>
@@ -255,7 +255,7 @@ if (!function_exists('sticky_anything_config_page')) {
 
 		<hr />
 
-		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.1.2 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
+		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.1.3 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
 
 	</div>
 
