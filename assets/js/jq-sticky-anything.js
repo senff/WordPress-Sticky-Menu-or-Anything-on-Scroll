@@ -41,7 +41,7 @@
   };
 
 
-function stickIt(stickyTop,minwidth,maxwidth) {
+function stickIt(stickyTop,minwidth,maxwidth,stickyzindex) {
 
   var orgElementPos = $('.original').offset();
   orgElementTop = orgElementPos.top;               
