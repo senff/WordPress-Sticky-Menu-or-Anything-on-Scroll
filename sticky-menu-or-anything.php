@@ -5,7 +5,7 @@ Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Description: Pick any element on your page, and it will stick when it reaches the top of the page when you scroll down. Usually handy for navigation menus, but can be used for any (unique) element on your page.
 Author: Mark Senff
 Author URI: http://www.senff.com
-Version: 1.1.3
+Version: 1.1.4
 */
 
 defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
@@ -15,7 +15,7 @@ defined('ABSPATH') or die('Gorgonzola. Wow, BOB, wow.');
 
 if (!function_exists('sticky_anthing_default_options')) {
 	function sticky_anthing_default_options() {
-		$versionNum = '1.1.3';
+		$versionNum = '1.1.4';
 		if (get_option('sticky_anything_options') === false) {
 			$new_options['sa_version'] = $versionNum;
 			$new_options['sa_element'] = '';
@@ -31,7 +31,7 @@ if (!function_exists('sticky_anthing_default_options')) {
 
 if (!function_exists('sticky_anything_update')) {
 	function sticky_anything_update() {
-		$versionNum = '1.1.3';
+		$versionNum = '1.1.4';
 		$existing_options = get_option('sticky_anything_options');
 
 		if(!isset($existing_options['sa_minscreenwidth'])) {
@@ -255,7 +255,7 @@ if (!function_exists('sticky_anything_config_page')) {
 
 		<hr />
 
-		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.1.3 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
+		<p><a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Sticky Menu (or Anything!) on Scroll</a> version 1.1.4 by <a href="http://www.senff.com" target="_blank">Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/contact" target="_blank">Please Report Bugs</a> &nbsp;/&nbsp; Follow on Twitter: <a href="http://www.twitter.com/senff" target="_blank">@Senff</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything-wp" target="_blank">Detailed documentation</a> &nbsp;/&nbsp; <a href="http://www.senff.com/plugins/sticky-anything" target="_blank">Non-WP jQuery plugin</a></p>
 
 	</div>
 

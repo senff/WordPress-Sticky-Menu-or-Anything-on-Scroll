@@ -4,7 +4,7 @@
 * Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 * Requires at least: 3.6
 * Tested up to: 4.0
-* Stable tag: 1.1.3
+* Stable tag: 1.1.4
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,8 +59,12 @@ For any other issues, please use the [WordPress.org forum](https://wordpress.org
 
 ## Changelog
 
+### 1.1.4
+* Fixes bug that occurs with responsive themes that have dynamic menus. Cloned menu is now removed from the DOM when stickiness is not needed. THIS IS STILL UNDER REVIEW.
+
 ### 1.1.3
-* Fixes width calculation bug introduced in previous version (sorry about that), box sizing now supported.
+* Fixes width calculation bug introduced in previous version (sorry about that).
+* Box sizing now supported.
 
 ### 1.1.2
 * Fixes element width calculation bug.
@@ -76,6 +80,9 @@ For any other issues, please use the [WordPress.org forum](https://wordpress.org
 
 
 ## Upgrade Notice 
+
+### 1.1.4
+Fixes bug that occurs with responsive themes that have dynamic menus. THIS IS STILL UNDER REVIEW.
 
 ### 1.1.3
 Fixes width calculation bug introduced in previous version (sorry about that), box sizing now supported.
