@@ -72,9 +72,12 @@
   function stickIt(stickyTop,minwidth,maxwidth,stickyZindex,pushup,dynamic,adminbar) {
 
     var orgElementPos = $('.original').offset();
-    var pushElementPos = $(pushup).offset();
     orgElementTop = orgElementPos.top;               
-    pushElementTop = pushElementPos.top;    
+
+    if(pushup) {
+      var pushElementPos = $(pushup).offset();
+      pushElementTop = pushElementPos.top;    
+    } 
 
     // Calculating actual viewport width
     var e = window, a = 'inner';
@@ -110,7 +113,7 @@
         createClone(stickyTop,stickyZindex);
       }
 
-      if ($(window).scrollTop() > (pushElementTop-heightOrgElement-adminBarHeight)) {
+      if (pushup && ($(window).scrollTop() > (pushElementTop-heightOrgElement-adminBarHeight))) {
         stickyTopMargin = (pushElementTop-heightOrgElement-$(window).scrollTop());
       } else {
         stickyTopMargin = adminBarHeight;
