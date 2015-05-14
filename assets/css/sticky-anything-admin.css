@@ -1,0 +1,50 @@
+.hide {
+	display:none;
+}
+
+.main-content {
+	float:left;
+	width:70%;
+}
+
+#sticky-faq p {
+	font-size:14px;
+	margin-bottom:20px;
+}
+
+#sticky-faq strong {
+	color:#222;
+	font-size:16px;
+	padding-top:20px;
+	margin-bottom:3px;
+	border-top:solid 1px #ccc;
+	display:block;
+}
+
+#sticky-faq p:nth-of-type(1) strong {
+	border-top:none;
+}
+
+.main-sidebar {
+	float:right;
+	width:25%;
+	background:#ffffff;
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);	
+}
+
+.main-sidebar h3 {
+	margin: 0;
+	padding: 8px 12px;
+	border-bottom: 1px solid #ececec;
+}
+
+.main-sidebar .inner {
+	padding:10px;
+}
+
+.main-sidebar p {
+	padding:8px;
+	margin:0;
+	border-top:solid 1px #e5e5e5;
+}
