@@ -58,7 +58,7 @@ if (!function_exists('sticky_anything_update')) {
 			$existing_options['sa_dynamicmode'] = false;
 		} 
 
-		if(!isset($existing_options['sa_dynamicmode'])) {
+		if(!isset($existing_options['sa_pushup'])) {
 			// Introduced in version 1.3
 			$existing_options['sa_pushup'] = '';
 			$existing_options['sa_adminbar'] = true;
