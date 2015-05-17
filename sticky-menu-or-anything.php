@@ -261,7 +261,7 @@ if (!function_exists('sticky_anything_config_page')) {
 										if ($sticky_anything_options['sa_element'] != '#NO-ELEMENT') {
 											echo esc_html( $sticky_anything_options['sa_element'] ); 
 										}
-									?>"/> <?php _e('(e.g. #main-navigation, .main-menu-1, header nav, etc.)','Sticky Anything plugin'); ?>
+									?>"/> <?php _e('(choose ONE element, e.g. #main-navigation, OR .main-menu-1, OR header nav, etc.)','Sticky Anything plugin'); ?>
 								</td>
 							</tr>
 
@@ -309,7 +309,7 @@ if (!function_exists('sticky_anything_config_page')) {
 										if ($sticky_anything_options['sa_pushup'] != '#NO-ELEMENT') {
 											echo esc_html( $sticky_anything_options['sa_pushup'] ); 
 										}
-									?>"/> <?php _e('(e.g. #footer, .widget-bottom, etc.)','Sticky Anything plugin'); ?>
+									?>"/> <?php _e('(choose ONE element, e.g. #footer, OR .widget-bottom, etc.)','Sticky Anything plugin'); ?>
 								</td>
 							</tr>
 
