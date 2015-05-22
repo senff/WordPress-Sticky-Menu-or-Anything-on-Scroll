@@ -16,7 +16,7 @@
 <?php _e('Check the "Consider Administrator Toolbar" checkbox in the plugin\'s settings. With this setting on, your sticky element will be placed a little lower if there\'s an Administrator Toolbar present on the page.','Sticky Anything plugin'); ?></p>
 
 <p><strong><?php _e('Q: Well it works, but once the element becomes sticky, it\'s not positioned properly at all.','Sticky Anything plugin'); ?></strong>
-<?php _e('There are situations when this happens, especially when the original element has specific properties that are specifically used to manipulate its position. Things like negative margins, absolute positioning or left/top values on the original element can have an undesired effects when the element becomes sticky.','Sticky Anything plugin'); ?></p>
+<?php _e('There are situations when this happens, especially when the original element has specific properties that are specifically used to manipulate its position. Things like negative margins, absolute positioning or left/top values on the original element can have undesired effects when the element becomes sticky. If possible, try to avoid that.','Sticky Anything plugin'); ?></p>
 
 <p><strong><?php _e('Q: Still doesn\'t work. What could be wrong?','Sticky Anything plugin'); ?></strong>
 <?php _e('Check the "Debug Mode" checkbox in the plugin\'s settings. Reload the page and you may see errors in your browser\'s console window. If you\'ve used a selector that returns zero elements on the page, OR more than one, it will be shown.','Sticky Anything plugin'); ?></p>
