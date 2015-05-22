@@ -15,6 +15,9 @@
 <p><strong><?php _e('Q: Users who are logged in to my site have a black Administrator Toolbar at the top of the screen, which would hide my sticky element when it\'s at the top of the screen. How can I fix that?','Sticky Anything plugin'); ?></strong>
 <?php _e('Check the "Consider Administrator Toolbar" checkbox in the plugin\'s settings. With this setting on, your sticky element will be placed a little lower if there\'s an Administrator Toolbar present on the page.','Sticky Anything plugin'); ?></p>
 
+<p><strong><?php _e('Q: Well it works, but once the element becomes sticky, it\'s not positioned properly at all.','Sticky Anything plugin'); ?></strong>
+<?php _e('There are situations when this happens, especially when the original element has specific properties that deal with its position. To make sure the plugin sticks an element properly, try to avoid any negative margins and absolute positioning on the original element.','Sticky Anything plugin'); ?></p>
+
 <p><strong><?php _e('Q: Still doesn\'t work. What could be wrong?','Sticky Anything plugin'); ?></strong>
 <?php _e('Check the "Debug Mode" checkbox in the plugin\'s settings. Reload the page and you may see errors in your browser\'s console window. If you\'ve used a selector that returns zero elements on the page, OR more than one, it will be shown.','Sticky Anything plugin'); ?></p>
 
