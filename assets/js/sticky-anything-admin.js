@@ -1,5 +1,5 @@
 /**
-* @preserve Sticky Anything 1.4 | @senff | GPL2 Licensed
+* @preserve Sticky Anything 2.0 | @senff | GPL2 Licensed
 */
 
 jQuery(function($) {
