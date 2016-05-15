@@ -5,7 +5,7 @@
 * Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 * Requires at least: 3.6
 * Tested up to: 4.5
-* Stable tag: 1.3.1
+* Stable tag: 1.4
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,11 @@ The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-an
 
 ## Changelog
 
+### 1.4 
+* Removed error notification if no pushup-element is selected
+* Renaming class "cloned" to "sticky-element-cloned" and "original" to "sticky-element-original" to avoid conflicts with Owl Carousel
+* Fixed bug where cloned element width would be rounded down if it contained sub-pixels
+
 ### 1.3.1 
 * Minor bug fix for push-up element
 
@@ -136,6 +141,9 @@ The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-an
 
 
 ## Upgrade Notice 
+
+## 1.4
+* Couple of bug fixes
 
 ### 1.3.1
 * Minor bug fix for push-up element
