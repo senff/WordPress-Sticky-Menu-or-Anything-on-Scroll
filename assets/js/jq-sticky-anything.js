@@ -1,5 +1,5 @@
 /**
-* @preserve Sticky Anything 1.3.1 | @senff | GPL2 Licensed
+* @preserve Sticky Anything 1.4 | @senff | GPL2 Licensed
 */
 
 (function ($) {
@@ -24,7 +24,7 @@
 
     if (numPushElements < 1) {
       // There are no elements on the page with the called selector for the Push-up Element.
-      if(settings.debugmode == true) {
+      if((settings.debugmode == true) && (settings.pushup)) {
         console.error('STICKY ANYTHING DEBUG: There are no elements with the selector/class/ID you selected for the Push-up element ("'+settings.pushup+'").');
       }
       // Resetting it to NOTHING.
@@ -56,7 +56,7 @@
         console.error('STICKY ANYTHING DEBUG: There There are '+numPushElements+' elements with the selector/class/ID you selected for the sticky element ("'+this.selector+'"). You can only make ONE element sticky.');
       }  
     } else {
-      $(this).addClass('original');
+      $(this).addClass('sticky-element-original');
       if(settings.dynamicmode != true) {
         // Create a clone of the menu, right next to original (in the DOM) on initial page load
         createClone(settings.top,settings.zindex,settings.adminbar);
@@ -71,7 +71,7 @@
 
   function stickIt(stickyTop,minwidth,maxwidth,stickyZindex,pushup,dynamic,adminbar) {
 
-    var orgElementPos = $('.original').offset();
+    var orgElementPos = $('.sticky-element-original').offset();
     orgElementTop = orgElementPos.top;               
 
     if(pushup) {
@@ -98,17 +98,20 @@
       // scrolled past the original position; now only show the cloned, sticky element.
 
       // Cloned element should always have same left position and width as original element.     
-      orgElement = $('.original');
+      orgElement = $('.sticky-element-original');
       coordsOrgElement = orgElement.offset();
       leftOrgElement = coordsOrgElement.left;  
-      widthOrgElement = orgElement.css('width');
+      widthOrgElement = orgElement[0].getBoundingClientRect().width;
+      if (!widthOrgElement) {
+        widthOrgElement = orgElement.css('width');  // FALLBACK for subpixels
+      }
       heightOrgElement = orgElement.outerHeight();
 
       // If padding is percentages, convert to pixels
       paddingOrgElement = [orgElement.css('padding-top'), orgElement.css('padding-right'), orgElement.css('padding-bottom'), orgElement.css('padding-left')];
       paddingCloned = paddingOrgElement[0] + ' ' + paddingOrgElement[1] + ' ' + paddingOrgElement[2] + ' ' + paddingOrgElement[3];
 
-      if( (dynamic == true) && ($('.cloned').length < 1)     ) {
+      if( (dynamic == true) && ($('.sticky-element-cloned').length < 1)     ) {
         // DYNAMIC MODE: if there is no clone present, create it right now
         createClone(stickyTop,stickyZindex);
       }
@@ -116,9 +119,9 @@
       // Fixes bug where height of original element returns zero
       elementHeight = 0;
       if (heightOrgElement < 1) {
-        elementHeight = $('.cloned').outerHeight();
+        elementHeight = $('.sticky-element-cloned').outerHeight();
       } else {
-        elementHeight = $('.original').outerHeight();
+        elementHeight = $('.sticky-element-original').outerHeight();
       }
 
       // If scrolled position = pushup-element (top coordinate) - space between top and element - element height - admin bar
@@ -129,21 +132,21 @@
         stickyTopMargin = adminBarHeight;
       }
 
-      $('.cloned').css('left',leftOrgElement+'px').css('top',stickyTop+'px').css('width',widthOrgElement).css('margin-top',stickyTopMargin).css('padding',paddingCloned).show();
-      $('.original').css('visibility','hidden');
+      $('.sticky-element-cloned').css('left',leftOrgElement+'px').css('top',stickyTop+'px').css('width',widthOrgElement).css('margin-top',stickyTopMargin).css('padding',paddingCloned).show();
+      $('.sticky-element-original').css('visibility','hidden');
     } else {
       // not scrolled past the menu; only show the original menu.
       if(dynamic == true) {
-        $('.cloned').remove();
+        $('.sticky-element-cloned').remove();
       } else {
-        $('.cloned').hide();
+        $('.sticky-element-cloned').hide();
       }
-      $('.original').css('visibility','visible');
+      $('.sticky-element-original').css('visibility','visible');
     }
   }
 
   function createClone(cloneTop,cloneZindex) {
-    $('.original').clone().insertAfter($('.original')).addClass('cloned').css('position','fixed').css('top',cloneTop+'px').css('margin-left','0').css('z-index',cloneZindex).removeClass('original').hide();
+    $('.sticky-element-original').clone().insertAfter($('.sticky-element-original')).addClass('sticky-element-cloned').css('position','fixed').css('top',cloneTop+'px').css('margin-left','0').css('z-index',cloneZindex).removeClass('sticky-element-original').hide();
   }
 
 }(jQuery));
