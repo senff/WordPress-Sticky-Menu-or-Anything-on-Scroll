@@ -5,7 +5,7 @@
 (function($) {
 	$(document).ready(function($) {
 
-		var thisIsSomeBreakpoint = '' // solely to use as a breakpoint, if needed.
+		var thisIsSomeBreakpoint = '' // solely to use as a debugging breakpoint, if needed.
 
 		$(sticky_anything_engage.element).stickThis({
 			top:sticky_anything_engage.topspace,

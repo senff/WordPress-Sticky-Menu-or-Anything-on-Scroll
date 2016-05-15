@@ -316,7 +316,7 @@ if (!function_exists('sticky_anything_config_page')) {
 										if ($sticky_anything_options['sa_pushup'] != '#NO-ELEMENT') {
 											echo esc_html( $sticky_anything_options['sa_pushup'] ); 
 										}
-									?>"/> <em><?php _e('(choose ONE element, e.g. #footer, OR .widget-bottom, etc.)','Sticky Anything plugin'); ?></em>
+									?>"/> <em><?php _e('(choose ONE element, e.g. <strong>#footer</strong>, OR <strong>.widget-bottom</strong>, etc.)','Sticky Anything plugin'); ?></em>
 								</td>
 							</tr>
 
@@ -330,11 +330,12 @@ if (!function_exists('sticky_anything_config_page')) {
 							</tr>
 
 							<tr id="row-dynamic-mode" <?php if ($sticky_anything_options['sa_legacymode'] == false ) echo 'class="disabled-feature"';?>>
-								<th scope="row"><?php _e('Dynamic mode:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('When Dynamic Mode is OFF, a cloned element will be created upon page load. If this mode is ON, a cloned element will be created every time your scrolled position hits the \'sticky\' point (option available in Legacy Mode only).','Sticky Anything plugin'); ?>" class="help">?</a></th>
-								<td>
+								<th scope="row"><div class="showhide" <?php if ($sticky_anything_options['sa_legacymode'] == false ) echo 'style="display:none;"';?>><?php _e('Dynamic mode:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('When Dynamic Mode is OFF, a cloned element will be created upon page load. If this mode is ON, a cloned element will be created every time your scrolled position hits the \'sticky\' point (option available in Legacy Mode only).','Sticky Anything plugin'); ?>" class="help">?</a></div></th>
+								<td><div class="showhide" <?php if ($sticky_anything_options['sa_legacymode'] == false ) echo 'style="display:none;"';?>>
 									<input type="checkbox" id="sa_dynamicmode" name="sa_dynamicmode" <?php if ($sticky_anything_options['sa_dynamicmode']  ) echo ' checked="checked" ';?> />
 									<label for="sa_dynamicmode"><strong><?php _e('If the plugin doesn\'t work in your theme (often the case with responsive themes), try it in Dynamic Mode.','Sticky Anything plugin'); ?></strong></label>
 									<p class="description"><?php _e('NOTE: this is not a \'Magic Checkbox\' that fixes all problems. It simply solves some issues that frequently appear with some responsive themes, but doesn\'t necessarily work in ALL situations.','Sticky Anything plugin'); ?></p>
+									</div>
 								</td>
 							</tr>
 

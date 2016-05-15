@@ -46,8 +46,10 @@ jQuery(function($) {
     $('#sa_legacymode').on('change',function() {
         if($("#sa_legacymode").is(':checked')) {
             $("#row-dynamic-mode").removeClass('disabled-feature'); 
+            $("#row-dynamic-mode .showhide").slideDown(); 
         } else {
             $("#row-dynamic-mode").addClass('disabled-feature');
+            $("#row-dynamic-mode .showhide").slideUp(); 
         }
     });
 

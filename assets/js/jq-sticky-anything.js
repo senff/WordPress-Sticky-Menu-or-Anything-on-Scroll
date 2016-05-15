@@ -12,6 +12,7 @@
       minscreenwidth: 0, 
       maxscreenwidth: 99999, 
       zindex: 1, 
+      legacymode: false,
       dynamicmode: false,
       debugmode: false,
       pushup: '',
@@ -20,7 +21,6 @@
 
     var numElements = $(this).length;
     var numPushElements = $(settings.pushup).length;
-
 
     if (numPushElements < 1) {
       // There are no elements on the page with the called selector for the Push-up Element.
@@ -41,7 +41,6 @@
       settings.pushup = '';
     } 
 
-
     if (numElements < 1) {
       // There are no elements on the page with the called selector.
       if(settings.debugmode == true) {
@@ -56,20 +55,29 @@
         console.error('STICKY ANYTHING DEBUG: There There are '+numPushElements+' elements with the selector/class/ID you selected for the sticky element ("'+this.selector+'"). You can only make ONE element sticky.');
       }  
     } else {
-      $(this).addClass('sticky-element-original');
-      if(settings.dynamicmode != true) {
-        // Create a clone of the menu, right next to original (in the DOM) on initial page load
-        createClone(settings.top,settings.zindex,settings.adminbar);
-      }
 
-      checkElement = setInterval(function(){stickIt(settings.top,settings.minscreenwidth,settings.maxscreenwidth,settings.zindex,settings.pushup,settings.dynamicmode,settings.adminbar)},10);
+      if(settings.legacymode == true) {
+
+        // LEGACY MODE
+        $(this).addClass('sticky-element-original');
+        if(settings.dynamicmode != true) {
+          // Create a clone of the menu, right next to original (in the DOM) on initial page load
+          createClone(settings.top,settings.zindex,settings.adminbar);
+        }
+
+        checkElement = setInterval(function(){stickItLegacy(settings.top,settings.minscreenwidth,settings.maxscreenwidth,settings.zindex,settings.pushup,settings.dynamicmode,settings.adminbar)},10);
+      } else {
+        // MODERN MODE
+        console.log('modern mode');
+
+      }
     }
 
     return this;
   };
 
 
-  function stickIt(stickyTop,minwidth,maxwidth,stickyZindex,pushup,dynamic,adminbar) {
+  function stickItLegacy(stickyTop,minwidth,maxwidth,stickyZindex,pushup,dynamic,adminbar) {
 
     var orgElementPos = $('.sticky-element-original').offset();
     orgElementTop = orgElementPos.top;               
