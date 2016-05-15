@@ -5,7 +5,7 @@ Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Description: Pick any element on your page, and it will stick when it reaches the top of the page when you scroll down. Usually handy for navigation menus, but can be used for any (unique) element on your page.
 Author: Mark Senff
 Author URI: http://www.senff.com
-Version: 1.3
+Version: 1.3.1
 */
 
 defined('ABSPATH') or die('INSERT COIN');
@@ -20,7 +20,7 @@ defined('ABSPATH') or die('INSERT COIN');
  */
 if (!function_exists('sticky_anthing_default_options')) {
 	function sticky_anthing_default_options() {
-		$versionNum = '1.3';
+		$versionNum = '1.3.1';
 		if (get_option('sticky_anything_options') === false) {
 			$new_options['sa_version'] = $versionNum;
 			$new_options['sa_element'] = '';
@@ -44,7 +44,7 @@ if (!function_exists('sticky_anthing_default_options')) {
  */
 if (!function_exists('sticky_anything_update')) {
 	function sticky_anything_update() {
-		$versionNum = '1.3';
+		$versionNum = '1.3.1';
 		$existing_options = get_option('sticky_anything_options');
 
 		if(!isset($existing_options['sa_minscreenwidth'])) {
@@ -261,7 +261,7 @@ if (!function_exists('sticky_anything_config_page')) {
 										if ($sticky_anything_options['sa_element'] != '#NO-ELEMENT') {
 											echo esc_html( $sticky_anything_options['sa_element'] ); 
 										}
-									?>"/> <?php _e('(choose ONE element, e.g. #main-navigation, OR .main-menu-1, OR header nav, etc.)','Sticky Anything plugin'); ?>
+									?>"/> <em><?php _e('(choose ONE element, e.g. #main-navigation, OR .main-menu-1, OR header nav, etc.)','Sticky Anything plugin'); ?></em>
 								</td>
 							</tr>
 
@@ -273,8 +273,8 @@ if (!function_exists('sticky_anything_config_page')) {
 								</td>
 							</tr>
 
-							<tr>
-								<th scope="row"><?php _e('Check for Admin Toolbar:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('If the sticky element gets obscured by the Administrator Toolbar for logged in users (or vice versa), check this box.','Sticky Anything plugin'); ?>" class="help">?</a></th>
+							<tr class="new-feature">
+								<th scope="row"><span class="new"><?php _e('NEW!','Sticky Anything plugin'); ?></span> <?php _e('Check for Admin Toolbar:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('If the sticky element gets obscured by the Administrator Toolbar for logged in users (or vice versa), check this box.','Sticky Anything plugin'); ?>" class="help">?</a></th>
 								<td>
 									<input type="checkbox" id="sa_adminbar" name="sa_adminbar" <?php if ($sticky_anything_options['sa_adminbar']  ) echo ' checked="checked" ';?> />
 									<label for="sa_adminbar"><strong><?php _e('Move the sticky element down a little if there is an Administrator Toolbar at the top (for logged in users).','Sticky Anything plugin'); ?></strong></label>
@@ -302,14 +302,14 @@ if (!function_exists('sticky_anything_config_page')) {
 								</td>
 							</tr>
 
-							<tr>
-								<th scope="row"><?php _e('Push-up element (optional):','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('If you want your sticky element to be \'pushed up\' again by another element lower on the page, enter it here. Make sure this is a unique identifier.','Sticky Anything plugin'); ?>" class="help">?</a></th>
+							<tr class="new-feature">
+								<th scope="row"><span class="new"><?php _e('NEW!','Sticky Anything plugin'); ?></span> <?php _e('Push-up element (optional):','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('If you want your sticky element to be \'pushed up\' again by another element lower on the page, enter it here. Make sure this is a unique identifier.','Sticky Anything plugin'); ?>" class="help">?</a></th>
 								<td>
 									<input type="text" id="sa_pushup" name="sa_pushup" value="<?php 
 										if ($sticky_anything_options['sa_pushup'] != '#NO-ELEMENT') {
 											echo esc_html( $sticky_anything_options['sa_pushup'] ); 
 										}
-									?>"/> <?php _e('(choose ONE element, e.g. #footer, OR .widget-bottom, etc.)','Sticky Anything plugin'); ?>
+									?>"/> <em><?php _e('(choose ONE element, e.g. #footer, OR .widget-bottom, etc.)','Sticky Anything plugin'); ?></em>
 								</td>
 							</tr>
 

@@ -7,6 +7,27 @@
 	width:70%;
 }
 
+.main-content .new-feature {
+	border:solid 1px #c0c0c0;
+	background:#e7e7e7;
+	border-right:solid 1px #fff;
+	border-bottom:solid 1px #fff;
+}
+
+.main-content .new-feature th,
+.main-content .new-feature td {
+	padding-left:10px;
+}
+
+.main-content .new-feature .new {
+	font-weight:strong;
+	color:#e00;
+}
+
+.main-content input[type="text"] {
+	width:200px;
+}
+
 #sticky-faq p {
 	font-size:14px;
 	margin-bottom:20px;
@@ -47,4 +68,29 @@
 	padding:8px;
 	margin:0;
 	border-top:solid 1px #e5e5e5;
+}
+
+
+@media screen and (max-width: 782px) {
+	.main-content,
+	.main-sidebar {
+		width:100%;
+		float:none;
+		clear:both;
+	}
+
+	.main-content .new-feature {
+		border:none;
+		background:transparent;
+	}
+
+	.main-content .new-feature th,
+	.main-content .new-feature td {
+		padding-left:0;
+	}
+
+	.main-content td {
+		padding-bottom:20px;
+		border-bottom:dashed 1px #c0c0c0;
+	}
 }

@@ -1,11 +1,11 @@
 === Sticky Menu (or Anything!) on Scroll ===
 Contributors: senff
 Donate link: http://www.senff.com/donate
-Tags: plugin, sticky, menu, scroll, element
+Tags: sticky header, sticky menu, sticky, header, menu
 Plugin URI: http://www.senff.com/plugins/sticky-anything-wp
 Requires at least: 3.6
-Tested up to: 4.2
-Stable tag: 1.3
+Tested up to: 4.5
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,8 @@ A little bit of basic HTML/CSS knowledge is required. You just need to know how 
 * **Any element can stick**: although common use is for navigation menus, the plugin will let you pick any unique element with a name, class or ID to stick at the top of the page once you scroll past it. Use it for a sidebar, Call-to-action box, banner ad, etc.
 * **Positioning from top**: optionally, you can add any amount of space between the sticky element and the top of the page, so that the element is not always stuck at the "ceiling" of the page.
 * **Enable for certain screen sizes only**: optionally, you can set a minimum and/or maximum screen size where the stickiness should work. This can be handy if you have a responsive site and you don't want your element to be sticky on smaller screens, for example. 
+* **Push-up element**: optionally, you can pick any other element lower on the page that will push the sticky element up again (for example a sidebar widget).
+* **Admin Bar aware**: checks if the current user has an Admin Toolbar at the top of the page. If it has, the sticky element will not obscure it (or be obscured by it).
 * **Z-index**: in case there are other elements on the page that obscure or peek through your sticky element, you can add a Z-index easily.
 * **Dynamic Mode**: some issues that frequently appear in responsive themes have been address by adding a Dynamic Mode. See FAQ for details.
 * **Debug Mode:** find out possible reasons why your element doesn't stick by switching on Debug Mode, and error messages will appear in your browser's console.
@@ -35,6 +37,7 @@ A little bit of basic HTML/CSS knowledge is required. You just need to know how 
 1. In your WordPress admin, go to PLUGINS and activate "Sticky Menu (or Anything!)"
 1. Go to SETTINGS - STICKY MENU (OR ANYTHING!)
 1. Pick the element you want to make sticky
+1. Party!
 
 
 == Frequently Asked Questions ==
@@ -46,7 +49,17 @@ Make sure that if you select the element by its classname, it is preceded by a d
 A number of people reported problems using a sticky element in a responsive theme - mostly situations involving a different menu (in both design and functionality) between desktop, tablet and mobile views. The newly-introduced 'Dynamic Mode' solves some of these problems. Try it yourself and chances are that works for you as well (though it's not a setting that will magically solves any and all problems that may occur).
 
 = My menu sticks, but it doesn't open on the Responsive Theme when it's sticky. =
-This is a known bug, and an incompatibility with the theme. I'm looking into it. For the time being, it would be better to turn off stickiness for the mobile menu (set "Do not stick element when screen smaller than:" to 651 pixels).
+This is a known bug, and an incompatibility with the theme. I'm still looking into it. For the time being, it would be better to turn off stickiness for the mobile menu (set "Do not stick element when screen smaller than:" to 651 pixels).
+
+= I have another plugin called Easy Smooth Scroll Links, but once my menu becomes sticky, that one doesn't work anymore. =
+This has been reported by various users, and it turns out that the coding methods of this plugin are simply not compatible with the coding of the Easy Smooth Scroll Links plugin. Unfortunately, there is no solution available for this issue.
+There is an alternative workaround however. According to reports from users who had this issue, a plugin called "Page Scroll To ID" (available in the WordPress.org plugin repo) is a worthy alternative to Easy Smooth Scroll Links and works with the Sticky Anything plugin.
+
+= Users who are logged in to my site have a black Administrator Toolbar at the top of the screen, which would hide my sticky element when it's at the top of the screen. How can I fix that? =
+Check the "Consider Administrator Toolbar" checkbox in the plugin's settings. With this setting on, your sticky element will be placed a little lower if there's an Administrator Toolbar present on the page.
+
+= Well it works, but once the element becomes sticky, it's not positioned properly at all. =
+There are situations when this happens, especially when the original element has specific properties that are specifically used to manipulate its position. Things like negative margins, absolute positioning or left/top values on the original element can have undesired effects when the element becomes sticky. If possible, try to avoid that.
 
 = Still doesn't work. What could be wrong? =
 Check the "Debug Mode" checkbox in the plugin's settings. Reload the page and you may see errors in your browser's console window. If you've used a selector that returns zero elements on the page, OR more than one, it will be shown.
@@ -82,6 +95,9 @@ The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-an
 
 
 == Changelog ==
+
+= 1.3.1 =
+* Minor bug fix for push-up element
 
 = 1.3 =
 * Added functionality to move sticky element down in case there is an Administrator Toolbar at the top of the page
@@ -123,8 +139,11 @@ The plugin's own page can be found [here](http://www.senff.com/plugins/sticky-an
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+* Minor bug fix for push-up element
+
 = 1.3 =
-* Functionality added related to Administrator Toolbar and element that can push sticky element up
+* BY POPULAR DEMAND: functionalities added related to Administrator Toolbar and element that can push sticky element up
 
 = 1.2.4 =
 * Minor bugfix
