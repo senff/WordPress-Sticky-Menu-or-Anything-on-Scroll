@@ -14,6 +14,16 @@
 	border-bottom:solid 1px #fff;
 }
 
+.main-content .form-table .disabled-feature {
+	opacity:0.65;
+}
+
+.main-content .form-table .disabled-feature input,
+.main-content .form-table .disabled-feature label {
+	cursor:default;
+}
+
+
 .main-content .new-feature th,
 .main-content .new-feature td {
 	padding-left:10px;

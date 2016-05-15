@@ -16,6 +16,7 @@ defined('ABSPATH') or die('INSERT COIN');
  */
 
 /**
+ * --- TRIGGERED ON ACTIVATION --------------------------------------------------------------------------
  * --- IF DATABASE VALUES ARE NOT SET AT ALL, ADD DEFAULT OPTIONS TO DATABASE ---------------------------
  */
 if (!function_exists('sticky_anthing_default_options')) {
@@ -29,6 +30,7 @@ if (!function_exists('sticky_anthing_default_options')) {
 			$new_options['sa_minscreenwidth'] = '';			
 			$new_options['sa_maxscreenwidth'] = '';			
 			$new_options['sa_zindex'] = '';
+			$new_options['sa_legacymode'] = false;
 			$new_options['sa_dynamicmode'] = false;		
 			$new_options['sa_debugmode'] = false;
 			$new_options['sa_pushup'] = '';
@@ -38,7 +40,7 @@ if (!function_exists('sticky_anthing_default_options')) {
 }
 
 /**
- * --- IF DATABASE VALUES EXIST, CHECK IF NEWER OPTIONS EXIST ------------------------------------------
+ * --- IF DATABASE VALUES EXIST, THEN THIS IS AN UPGRADE, SO CHECK IF NEWER OPTIONS EXIST --------------
  * --- IF NOT, ADD THESE OPTIONS WITH DEFAULT VALUES ---------------------------------------------------
  * --- AND UPDATE VERSION NUMBER FOR SURE --------------------------------------------------------------
  */
@@ -64,6 +66,12 @@ if (!function_exists('sticky_anything_update')) {
 			$existing_options['sa_adminbar'] = true;
 		} 
 
+		if(!isset($existing_options['sa_legacymode'])) {
+			// Introduced in version 2.0
+			// Keep the old/legacy mode, since that mode obviously worked before the upgrade.
+			$existing_options['sa_legacymode'] = true;
+		}
+
 		$existing_options['sa_version'] = $versionNum;
 		update_option('sticky_anything_options',$existing_options);
 	}
@@ -83,8 +91,6 @@ if (!function_exists('load_sticky_anything')) {
 	    	wp_register_script('stickyAnythingLib', plugins_url('/assets/js/jq-sticky-anything.min.js', __FILE__), array( 'jquery' ), $versionNum);
 	    	wp_enqueue_script('stickyAnythingLib');
 
-		$options = get_option('sticky_anything_options');
-
 		// Set defaults for by-default-empty elements (because '' does not work with the JQ plugin) 
 		if (!$options['sa_topspace']) {
 			$options['sa_topspace'] = '0';
@@ -99,7 +105,7 @@ if (!function_exists('load_sticky_anything')) {
 		}
 
 		// If empty, set to 1 - not to 0. Also, if set to "0", keep it at 0.
-		if (strlen($options['sa_zindex']) == "0") {
+		if (strlen($options['sa_zindex']) == "0") {		// LENGTH is 0 (not the actual value)
 			$options['sa_zindex'] = '1';
 		}
 
@@ -109,6 +115,7 @@ if (!function_exists('load_sticky_anything')) {
 		      'minscreenwidth' => $options['sa_minscreenwidth'],
 		      'maxscreenwidth' => $options['sa_maxscreenwidth'],
 		      'zindex' => $options['sa_zindex'],
+		      'legacymode' => $options['sa_legacymode'],
 		      'dynamicmode' => $options['sa_dynamicmode'],
 		      'debugmode' => $options['sa_debugmode'],
 		      'pushup' => $options['sa_pushup'],
@@ -313,8 +320,17 @@ if (!function_exists('sticky_anything_config_page')) {
 								</td>
 							</tr>
 
-							<tr>
-								<th scope="row"><?php _e('Dynamic mode:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('When Dynamic Mode is OFF, a cloned element will be created upon page load. If this mode is ON, a cloned element will be created every time your scrolled position hits the \'sticky\' point.','Sticky Anything plugin'); ?>" class="help">?</a></th>
+							<tr class="new-feature">
+								<th scope="row"><span class="new"><?php _e('NEW!','Sticky Anything plugin'); ?></span> <?php _e('Legacy mode:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('If you upgraded from an earlier version and it always worked before, use legacy mode to keep using the old method.','Sticky Anything plugin'); ?>" class="help">?</a></th>
+								<td>
+									<input type="checkbox" id="sa_legacymode" name="sa_legacymode" <?php if ($sticky_anything_options['sa_legacymode'] == true ) echo ' checked="checked" ';?> />
+									<label for="sa_legacymode"><strong><?php _e('Legacy Mode (only recommended if you upgraded from earlier version).','Sticky Anything plugin'); ?></strong></label>
+									<p class="description"><?php _e('In version 2.0, a new/better method for making elements sticky was introduced. However, if you upgraded this plugin from an earlier version, and the old method always worked for you, there is no need to use the new method and you should keep this option checked.<br>More information about this setting can be found in the <a href="#faq" class="faq">FAQ</a>.','Sticky Anything plugin'); ?></p>
+								</td>
+							</tr>
+
+							<tr id="row-dynamic-mode" <?php if ($sticky_anything_options['sa_legacymode'] == false ) echo 'class="disabled-feature"';?>>
+								<th scope="row"><?php _e('Dynamic mode:','Sticky Anything plugin'); ?> <a href="#" title="<?php _e('When Dynamic Mode is OFF, a cloned element will be created upon page load. If this mode is ON, a cloned element will be created every time your scrolled position hits the \'sticky\' point (option available in Legacy Mode only).','Sticky Anything plugin'); ?>" class="help">?</a></th>
 								<td>
 									<input type="checkbox" id="sa_dynamicmode" name="sa_dynamicmode" <?php if ($sticky_anything_options['sa_dynamicmode']  ) echo ' checked="checked" ';?> />
 									<label for="sa_dynamicmode"><strong><?php _e('If the plugin doesn\'t work in your theme (often the case with responsive themes), try it in Dynamic Mode.','Sticky Anything plugin'); ?></strong></label>
@@ -422,6 +438,14 @@ if (!function_exists('process_sticky_anything_options')) {
 			}
 		}
 
+		foreach ( array('sa_legacymode') as $option_name ) {
+			if ( isset( $_POST[$option_name] ) ) {
+				$options[$option_name] = true;
+			} else {
+				$options[$option_name] = false;
+			}
+		}
+
 		foreach ( array('sa_dynamicmode') as $option_name ) {
 			if ( isset( $_POST[$option_name] ) ) {
 				$options[$option_name] = true;
@@ -459,7 +483,7 @@ if (!function_exists('sticky_anything_styles')) {
 			return;
 		}
 
-		wp_register_script('stickyAnythingAdminScript', plugins_url('/assets/js/sticky-anything-admin.js', __FILE__), array( 'jquery' ), '1.0');
+		wp_register_script('stickyAnythingAdminScript', plugins_url('/assets/js/sticky-anything-admin.js', __FILE__), array( 'jquery' ), '2.0');
 		wp_enqueue_script('stickyAnythingAdminScript');
 
 		wp_register_style('stickyAnythingAdminStyle', plugins_url('/assets/css/sticky-anything-admin.css', __FILE__) );

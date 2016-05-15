@@ -12,6 +12,7 @@
 			minscreenwidth:sticky_anything_engage.minscreenwidth,
 			maxscreenwidth:sticky_anything_engage.maxscreenwidth,
 			zindex:sticky_anything_engage.zindex,
+			legacymode:sticky_anything_engage.legacymode,
 			dynamicmode:sticky_anything_engage.dynamicmode,
 			debugmode:sticky_anything_engage.debugmode,
 			pushup:sticky_anything_engage.pushup,
